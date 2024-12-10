@@ -1,0 +1,45 @@
+﻿@model List<WebApplication1_HW_04_12_2024.ViewModels.ProductViewModel>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Product List</title>
+    <link rel="stylesheet" asp-href-include="~/css/site.css" />
+    <script asp-src-include="~/js/site.js"></script>
+</head>
+<body>
+    <h1>Product List</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.Id</td>
+                    <td>@product.Name</td>
+                    <td>@product.Description</td>
+                    <td>@product.Price</td>
+                    <td>
+                        <a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id" class="btn btn-info">Details</a>
+                        <a asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id" class="btn btn-primary">Edit</a>
+                        <form method="post" asp-action="Delete" asp-route-id="@product.Id" style="display:inline;">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a asp-controller="Product" asp-action="Create" class="btn btn-success">Add New Product</a>
+</body>
+</html>
